@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Medical X-ray Detection API Test</h1>
+    
+    <form id="uploadForm">
+        <input type="file" id="fileInput" accept="image/*">
+        <button type="submit">Analyze</button>
+    </form>
+    
+    <div id="results" style="margin-top: 20px;">
+        <!-- Results will appear here -->
+    </div>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a file');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                console.log('Sending request to API...');
+                const response = await fetch('http://localhost:8000/detect/single', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'cors'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('API Response:', data);
+                
+                // Display results
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `
+                    <h2>Detection Results</h2>
+                    <p><strong>Detections:</strong> ${data.detection_count}</p>
+                    <p><strong>Processing Time:</strong> ${data.processing_time.toFixed(2)}s</p>
+                    <p><strong>Success:</strong> ${data.success}</p>
+                    
+                    <h3>Original Image</h3>
+                    <img src="${URL.createObjectURL(file)}" style="max-width: 300px; border: 1px solid #ccc;">
+                    
+                    <h3>Processed Image</h3>
+                    <img src="http://localhost:8000${data.image_url}" style="max-width: 300px; border: 1px solid #ccc;" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <p style="display: none; color: red;">Failed to load processed image: http://localhost:8000${data.image_url}</p>
+                    
+                    <h3>Detections</h3>
+                    <ul>
+                        ${data.detections.map(det => `
+                            <li>${det.class_name}: ${det.confidence_percent} (Score: ${det.confidence_score.toFixed(1)})</li>
+                        `).join('')}
+                    </ul>
+                `;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('results').innerHTML = `
+                    <h2 style="color: red;">Error</h2>
+                    <p>${error.message}</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

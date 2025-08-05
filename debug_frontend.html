@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Frontend Issue</title>
+</head>
+<body>
+    <h1>Debug Frontend Image Loading Issue</h1>
+    
+    <div id="test-results">
+        <p>Testing image loading...</p>
+    </div>
+    
+    <script>
+        // Test the actual API endpoint that the frontend is using
+        async function testImageLoading() {
+            const resultsDiv = document.getElementById('test-results');
+            
+            try {
+                // Test API connectivity
+                const testResponse = await fetch('http://localhost:8000/', { 
+                    mode: 'cors',
+                    method: 'GET'
+                });
+                
+                resultsDiv.innerHTML += `<p>✅ API connectivity: ${testResponse.ok ? 'Success' : 'Failed'}</p>`;
+                
+                // Test a known image URL
+                const imageUrl = 'http://localhost:8000/results/yolo_result_615673c3-15df-4cd6-bf90-80dd8a53bd37_0b1b897b1e1e170f1b5fd7aeff553afa.jpg';
+                
+                // Test image loading with fetch
+                try {
+                    const imgResponse = await fetch(imageUrl, { 
+                        mode: 'cors',
+                        method: 'HEAD'
+                    });
+                    resultsDiv.innerHTML += `<p>✅ Image URL test (fetch): ${imgResponse.ok ? 'Success' : 'Failed'} - Status: ${imgResponse.status}</p>`;
+                } catch (fetchError) {
+                    resultsDiv.innerHTML += `<p>❌ Image URL test (fetch): Failed - ${fetchError.message}</p>`;
+                }
+                
+                // Test image loading with img element
+                const img = new Image();
+                img.onload = function() {
+                    resultsDiv.innerHTML += `<p>✅ Image loading with img element: Success</p>`;
+                    resultsDiv.innerHTML += `<p>Image dimensions: ${this.width}x${this.height}</p>`;
+                    resultsDiv.innerHTML += `<img src="${imageUrl}" style="max-width: 300px; border: 1px solid #ccc;">`;
+                };
+                img.onerror = function() {
+                    resultsDiv.innerHTML += `<p>❌ Image loading with img element: Failed</p>`;
+                };
+                img.crossOrigin = "anonymous";
+                img.src = imageUrl;
+                
+                // Test relative URL (like the frontend uses)
+                const relativeUrl = '/results/yolo_result_615673c3-15df-4cd6-bf90-80dd8a53bd37_0b1b897b1e1e170f1b5fd7aeff553afa.jpg';
+                const img2 = new Image();
+                img2.onload = function() {
+                    resultsDiv.innerHTML += `<p>✅ Relative URL loading: Success</p>`;
+                    resultsDiv.innerHTML += `<img src="http://localhost:8000${relativeUrl}" style="max-width: 300px; border: 1px solid #ccc;">`;
+                };
+                img2.onerror = function() {
+                    resultsDiv.innerHTML += `<p>❌ Relative URL loading: Failed</p>`;
+                };
+                img2.src = `http://localhost:8000${relativeUrl}`;
+                
+            } catch (error) {
+                resultsDiv.innerHTML += `<p>❌ Error: ${error.message}</p>`;
+            }
+        }
+        
+        // Run test when page loads
+        window.onload = testImageLoading;
+    </script>
+</body>
+</html>

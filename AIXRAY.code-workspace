@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "AIXRAY",
+			"path": "."
+		}
+	],
+	"settings": {
+		"powershell.cwd": "AIXRAY"
+	}
+}
