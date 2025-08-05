@@ -1,0 +1,16 @@
+{"time":"2025-04-25T07:00:28.650320671Z","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/content/drive/MyDrive/VinBigData/yolov5/wandb/run-20250425_070028-cznpjmge/logs/debug-core.log"}
+{"time":"2025-04-25T07:00:28.828288188Z","level":"INFO","msg":"created new stream","id":"cznpjmge"}
+{"time":"2025-04-25T07:00:28.829018032Z","level":"INFO","msg":"writer: Do: started","stream_id":"cznpjmge"}
+{"time":"2025-04-25T07:00:28.829093707Z","level":"INFO","msg":"stream: started","id":"cznpjmge"}
+{"time":"2025-04-25T07:00:28.829278275Z","level":"INFO","msg":"sender: started","stream_id":"cznpjmge"}
+{"time":"2025-04-25T07:00:28.829307518Z","level":"INFO","msg":"handler: started","stream_id":"cznpjmge"}
+{"time":"2025-04-25T07:00:29.188381408Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-25T09:08:22.662828077Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-25T09:08:22.66303386Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-25T09:08:23.673753555Z","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run_cznpjmge_model","runtime_seconds":1.738554251}],"total_operations":1}}
+{"time":"2025-04-25T09:08:23.906006498Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-25T09:08:24.071788238Z","level":"INFO","msg":"stream: closing","id":"cznpjmge"}
+{"time":"2025-04-25T09:08:24.07456402Z","level":"INFO","msg":"handler: closed","stream_id":"cznpjmge"}
+{"time":"2025-04-25T09:08:24.074592752Z","level":"INFO","msg":"writer: Close: closed","stream_id":"cznpjmge"}
+{"time":"2025-04-25T09:08:24.074678923Z","level":"INFO","msg":"sender: closed","stream_id":"cznpjmge"}
+{"time":"2025-04-25T09:08:24.081974995Z","level":"INFO","msg":"stream: closed","id":"cznpjmge"}

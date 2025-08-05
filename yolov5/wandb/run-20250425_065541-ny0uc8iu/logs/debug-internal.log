@@ -1,0 +1,7 @@
+{"time":"2025-04-25T06:55:42.073314921Z","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/content/drive/MyDrive/VinBigData/yolov5/wandb/run-20250425_065541-ny0uc8iu/logs/debug-core.log"}
+{"time":"2025-04-25T06:55:42.257825809Z","level":"INFO","msg":"created new stream","id":"ny0uc8iu"}
+{"time":"2025-04-25T06:55:42.258573226Z","level":"INFO","msg":"stream: started","id":"ny0uc8iu"}
+{"time":"2025-04-25T06:55:42.258610075Z","level":"INFO","msg":"writer: Do: started","stream_id":"ny0uc8iu"}
+{"time":"2025-04-25T06:55:42.258651244Z","level":"INFO","msg":"handler: started","stream_id":"ny0uc8iu"}
+{"time":"2025-04-25T06:55:42.258679996Z","level":"INFO","msg":"sender: started","stream_id":"ny0uc8iu"}
+{"time":"2025-04-25T06:55:42.552940745Z","level":"INFO","msg":"Starting system monitor"}
